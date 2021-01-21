@@ -1,3 +1,4 @@
+/*
 buildscript {
     repositories {
         mavenCentral()
@@ -8,13 +9,23 @@ buildscript {
         classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
     }
 }
+*/
 
+plugins {
+	id 'org.springframework.boot' version '2.4.0'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+/*
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.junit.platform.gradle.plugin'
+*/
 
 jar {
     baseName = 'scorekeep-api'
@@ -42,4 +53,11 @@ dependencyManagement {
     imports {
         mavenBom("com.amazonaws:aws-java-sdk-bom:1.11.761")
     }
+}
+
+
+task explodedWar(type: Sync) {
+	dependsOn bootWar
+	into "${buildDir}/exploded"
+	with war
 }
