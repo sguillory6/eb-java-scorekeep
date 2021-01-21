@@ -1,0 +1,18 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo "Entered the pre-build phase"
+  build:
+    commands:
+      - echo "Entered build phase"
+      - gradle clean build
+  post_build:
+    commands:
+      - echo "Entered the post-build phase"
+      - gradle explodedWar
+artifacts:
+  files:
+    - '**/*'
+  base-directory: build/exploded
+  discard-paths: no
